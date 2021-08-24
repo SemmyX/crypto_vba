@@ -118,7 +118,12 @@ Test.IsEqual JsonResult("headers")("Customheader"), "MyCustomHeader"
 
 End Sub
 
-
+                                                                        
+' In case the HTTP request is not successful, the function returns the HTTP error number and text
+' plus the server's error message in a standardized format; see variable "ErrResp".
+' Example of what the function returns in case a not existing URL is requested:
+' {"error_nr":404,"error_txt":"HTTP-Not Found","response_txt":{"message":"NotFound"}}
+' => in case the response starts with >>{"error nr":<< it was NOT successful
 Function WebRequestURL(strURL As String, strMethod As String, Optional objHeaders As Dictionary, Optional strPostMsg As String) As String
 
 ' Instantiate a WinHttpRequest object and open it
